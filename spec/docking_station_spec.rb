@@ -1,7 +1,7 @@
 require 'docking_station'
 
 describe DockingStation do
-  subject(:dock) { described_class.new }
+  subject(:dock) { described_class.new(1) }
   let(:bike) { double(:bike) }
 
   describe "#dock" do
@@ -14,6 +14,11 @@ describe DockingStation do
   describe "#release" do
     it "raises exception to release if dock is empty" do
       expect { dock.release_bike }.to raise_error "No bikes available"
+    end
+  end
+  describe "#capacity" do
+    it "returns its own capacity" do
+      expect(dock.capacity).to eq(1)
     end
   end
 end
