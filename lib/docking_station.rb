@@ -12,14 +12,23 @@ class DockingStation
   end
 
   def release_bike
-    raise 'No bikes available'
+    raise 'No bikes available' if empty?
+    bikes.pop
   end
 
   def dock(bike)
-    raise 'Cannot dock at full station' if bikes.count >= self.capacity
+    raise 'Cannot dock at full station' if full?
     self.bikes << bike 
   end
   
   private
   attr_writer :bikes
+
+  def empty?
+    bikes.empty?
+  end
+
+  def full?
+    bikes.count >= capacity
+  end
 end

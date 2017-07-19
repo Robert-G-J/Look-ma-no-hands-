@@ -15,6 +15,10 @@ describe DockingStation do
     it "raises exception to release if dock is empty" do
       expect { dock.release_bike }.to raise_error "No bikes available"
     end
+    it "when there is a bike available" do
+      dock.dock(bike)
+      expect(dock.release_bike).to eq(bike)
+    end
   end
   describe "#capacity" do
     it "returns its own capacity" do
