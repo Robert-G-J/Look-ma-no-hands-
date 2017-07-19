@@ -20,8 +20,7 @@ describe DockingStation do
       expect(dock.release_bike).to eq(bike)
     end
     it "raises exception if there are no working bikes" do
-      allow(bike).to receive(:report_broken).and_return(true)
-      allow(bike).to receive(:broken).and_return(true)
+      bike = double(:bike, broken: true)
       dock.dock(bike)
       expect { dock.release_bike }.to raise_error "No working bikes available"
     end
