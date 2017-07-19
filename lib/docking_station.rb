@@ -13,12 +13,13 @@ class DockingStation
 
   def release_bike
     raise 'No bikes available' if empty?
+    raise 'No working bikes available' if bikes[-1].broken
     bikes.pop
   end
 
   def dock(bike)
     raise 'Cannot dock at full station' if full?
-    self.bikes << bike 
+    bike.broken ? bikes.unshift(bike) : bikes << bike
   end
   
   private
