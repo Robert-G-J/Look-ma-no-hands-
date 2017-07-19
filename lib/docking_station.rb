@@ -1,8 +1,13 @@
+require_relative 'bike'
+
 class DockingStation 
 
-  attr_reader :bikes
+  attr_reader :bikes, :capacity
 
-  def initialize
+  DEFAULT_CAPACITY = 10
+
+  def initialize(capacity = DEFAULT_CAPACITY)
+    @capacity = capacity
     @bikes = [] 
   end
 
@@ -11,6 +16,7 @@ class DockingStation
   end
 
   def dock(bike)
+    raise 'Cannot dock at full station' if bikes.count >= self.capacity
     self.bikes << bike 
   end
   
